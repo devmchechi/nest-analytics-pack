@@ -1,0 +1,37 @@
+id: daily-metrics
+name: Daily Metrics
+steps:
+  - id: fetch
+    agent: data-fetcher
+    critical: true
+    input: >-
+      Load every source in the Sources list of your instructions.md. Validate, clean and profile
+      the data, give the quality report, then end your reply with the Handoff section: each clean
+      dataset as a fenced csv block under a "### <name>" heading (daily aggregates for datasets
+      over 1,000 rows), then the profile as a fenced json block. The next agents cannot see your
+      files; they only get your reply.
+  - id: charts
+    agent: chart-generator
+    on_failure: continue
+    input: >-
+      Save each csv block from the Handoff section below to ./data/incoming/<name>.csv in your
+      working directory, then make today's charts from the Charts list in your instructions.md.
+      Reply with each chart's file name, title, alt text and key numbers, plus any caveats.
+
+      Data Fetcher's report and handoff:
+      {{fetch.output}}
+  - id: report
+    agent: report-writer
+    input: >-
+      Write today's report using the KPIs in your instructions.md. Save each csv block from the
+      Handoff section below to ./data/incoming/<name>.csv and compute every number from those
+      files. Use any context in ./reports/context.md in your working directory. Refer to the
+      charts listed below by title and file name (they are in Chart Generator's folder; if the
+      list is empty, write the report without charts), and put data-quality problems in the Data
+      notes section. Include the full report in your reply.
+
+      Data Fetcher's report and handoff:
+      {{fetch.output}}
+
+      Charts:
+      {{charts.output}}

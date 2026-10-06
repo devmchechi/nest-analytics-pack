@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Analytics Pack">
+  <path d="M8 8v48h48"/>
+  <path d="M20 46V36M32 46V28M44 46V20"/>
+  <path d="M18 26l12-10 8 6 14-12"/>
+</svg>

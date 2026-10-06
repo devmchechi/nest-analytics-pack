@@ -1,0 +1,7 @@
+id: analytics-pack
+name: Analytics Pack
+description: Load and validate CSV/JSON data, chart it honestly, and write a daily KPI report where every number is computed.
+version: 1.0.0
+min_nest_version: 0.1.0
+agents: [data-fetcher, chart-generator, report-writer]
+workflows: [daily-metrics]
